@@ -1,0 +1,16 @@
+{
+  "name": "social-bot",
+  "version": "1.0.0",
+  "description": "A bot made for getting followers on Intagram and Linkedin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15"
+  }
+}
