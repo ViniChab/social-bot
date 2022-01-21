@@ -3,8 +3,8 @@ const BrowserHandler = require("./services/browser-handler/browser-handler.servi
 const LinkedinCoordinatorService = require("./services/linkedin/linkedin-coordinator.service");
 
 const port = process?.env?.PORT || 5100;
-const express = require("express");
-const app = express();
+const Express = require("express");
+const app = Express();
 
 app.listen(port, () => {
   console.log(`### API RESTARTED ON PORT: ${port}`);

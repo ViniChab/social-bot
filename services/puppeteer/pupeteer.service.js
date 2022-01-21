@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 class PuppeteerService {
   waitForBrowser(browserHandler) {
     if (!browserHandler) {
@@ -12,6 +14,17 @@ class PuppeteerService {
         }
       }, 200);
     });
+  }
+
+  async screenshot(page, fileName = "default-screenshot.png", path = "media") {
+    try {
+      await page.screenshot({ path: `${path}/${fileName}` });
+    } catch (err) {
+      fs.mkdirSync(path);
+      await page.screenshot({ path: `${path}/${fileName}` });
+    }
+
+    await page.screenshot({ path: `${path}/${fileName}` });
   }
 }
 
