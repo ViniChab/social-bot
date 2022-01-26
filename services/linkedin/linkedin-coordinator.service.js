@@ -1,8 +1,6 @@
 const Puppeteer = require("puppeteer");
 const PuppeteerService = require("../puppeteer/pupeteer.service");
-
-const findElement = require("../../tools/find-element.tool");
-const LINKEDIN_URL = "https://www.linkedin.com/";
+const LoginService = require("./login/linkedin-login.service");
 
 class LinkedinCoordinatorService {
   puppeteerService;
@@ -16,8 +14,11 @@ class LinkedinCoordinatorService {
     const browser = await Puppeteer.launch();
     const page = await browser.newPage();
 
-    await page.goto(LINKEDIN_URL);
-    this.puppeteerService.screenshot(page);
+    LoginService.login(page);
+
+    setTimeout(() => {
+      this.puppeteerService.screenshot(page, 'after-login.png');
+    }, 1500);
   }
 }
 

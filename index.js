@@ -8,10 +8,11 @@ const app = Express();
 
 app.listen(port, () => {
   console.log(`### API RESTARTED ON PORT: ${port}`);
+  main();
 });
 
 // Main
-(async () => {
+async function main() {
   const browserHandler = new BrowserHandler();
   const puppeteerService = new PuppeteerService();
   const linkedinService = new LinkedinCoordinatorService();
@@ -21,4 +22,4 @@ app.listen(port, () => {
   console.log("### PUPPETEER STARTED");
 
   linkedinService.startLinkedinService();
-})();
+}
