@@ -2,6 +2,7 @@ const Puppeteer = require("puppeteer");
 
 const LoginHelper = require("../../bin/helpers/login.helper");
 const PuppeteerService = require("../puppeteer/pupeteer.service");
+const GenerateReportService = require("../generate-report/generate-report.service");
 const SendInvitationsService = require("../send-invitations/send-invitations.service");
 
 class LinkedinCoordinatorService {
@@ -16,8 +17,9 @@ class LinkedinCoordinatorService {
     const browser = await Puppeteer.launch();
     const page = await browser.newPage();
 
-    await this.login(page);
-    await this.startInvitationService(page);
+    await this.generateReport();
+    // await this.login(page);
+    // await this.startInvitationService(page);
   }
 
   async login(page) {
@@ -29,6 +31,11 @@ class LinkedinCoordinatorService {
   async startInvitationService(page) {
     const sendInvitationsService = new SendInvitationsService(page);
     sendInvitationsService.startInvitationService();
+  }
+
+  async generateReport() {
+    const generateReportService = new GenerateReportService();
+    generateReportService.generateReport("reports", "report.txt", "\n\naloha");
   }
 }
 

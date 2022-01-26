@@ -18,11 +18,8 @@ class PuppeteerService {
 
   async screenshot(page, fileName = "default-screenshot.png", path = "media") {
     try {
-      await page.screenshot({ path: `${path}/${fileName}` });
-    } catch (err) {
       fs.mkdirSync(path);
-      await page.screenshot({ path: `${path}/${fileName}` });
-    }
+    } catch (e) {}
 
     await page.screenshot({ path: `${path}/${fileName}` });
   }
