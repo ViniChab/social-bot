@@ -1,6 +1,8 @@
 const Puppeteer = require("puppeteer");
-const PuppeteerService = require("../puppeteer/pupeteer.service");
+
 const LoginHelper = require("../../bin/helpers/login.helper");
+const PuppeteerService = require("../puppeteer/pupeteer.service");
+const SendInvitationsService = require("../send-invitations/send-invitations.service");
 
 class LinkedinCoordinatorService {
   puppeteerService;
@@ -15,12 +17,18 @@ class LinkedinCoordinatorService {
     const page = await browser.newPage();
 
     await this.login(page);
+    await this.startInvitationService(page);
   }
 
   async login(page) {
     LoginHelper.login(page);
     await page.waitForSelector(".scaffold-layout__sidebar", { visible: true });
     this.puppeteerService.screenshot(page, "after-login.png");
+  }
+
+  async startInvitationService(page) {
+    const sendInvitationsService = new SendInvitationsService(page);
+    sendInvitationsService.startInvitationService();
   }
 }
 

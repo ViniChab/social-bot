@@ -1,6 +1,6 @@
 const PuppeteerService = require("./services/puppeteer/pupeteer.service");
 const BrowserHandler = require("./services/browser-handler/browser-handler.service");
-const LinkedinCoordinatorService = require("./services/linkedin/linkedin-coordinator.service");
+const LinkedinCoordinatorService = require("./services/linkedin-coordinator/linkedin-coordinator.service");
 
 const port = process?.env?.PORT || 5100;
 const Express = require("express");
