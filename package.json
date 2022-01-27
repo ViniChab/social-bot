@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "d3": "^7.3.0",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "fs": "^0.0.1-security",

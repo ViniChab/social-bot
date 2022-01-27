@@ -14,11 +14,17 @@ class LinkedinCoordinatorService {
   }
 
   async startLinkedinService() {
-    const browser = await Puppeteer.launch();
+    const browser = await Puppeteer.launch({
+      headless: false,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
     const page = await browser.newPage();
 
-    await this.generateReport();
-    // await this.login(page);
+    await this.login(page);
+    await page.waitForTimeout(this.randomTimeout());
+    await this.generateReport(page);
+    await page.waitForTimeout(this.randomTimeout());
+
     // await this.startInvitationService(page);
   }
 
@@ -33,9 +39,13 @@ class LinkedinCoordinatorService {
     sendInvitationsService.startInvitationService();
   }
 
-  async generateReport() {
+  async generateReport(page) {
     const generateReportService = new GenerateReportService();
-    generateReportService.generateReport("reports", "report.txt", "\n\naloha");
+    await generateReportService.generateReport(page);
+  }
+
+  randomTimeout() {
+    return Math.floor(Math.random() * (6000 - 2000 + 1)) + 2000;
   }
 }
 

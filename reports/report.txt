@@ -1,9 +1,1 @@
-## Report start
-Hello World!
-Hello World!
-Hello World!
-Hello World!
-Hello World!
-Hello World!
-
-aloha
+NUMBER_OF_CONNECTIONS:54;
