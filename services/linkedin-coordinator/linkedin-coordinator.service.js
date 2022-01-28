@@ -25,8 +25,7 @@ class LinkedinCoordinatorService {
     await this.login(page);
     await page.waitForTimeout(RandomTimeout.randomTimeout());
     await this.generateReport(page);
-    await page.waitForTimeout(RandomTimeout.randomTimeout());
-
+    // await page.waitForTimeout(RandomTimeout.randomTimeout());
     // await this.startInvitationService(page);
   }
 

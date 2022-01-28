@@ -11,21 +11,25 @@ class GenerateReportService {
   }
 
   async generateReport(page) {
-    await this.writeInfo(
-      "report.txt",
-      `REPORT_TIME:${new Date().toISOString()};`
-    );
+    try {
+      await this.writeInfo(
+        "report.txt",
+        `REPORT_TIME:${new Date().toISOString()};`
+      );
 
-    await this.goToMyConnectinsPage(page);
-    await this.generateConnectionsReport(page);
-    await this.goToProfilePage(page);
-    await this.generateViewsReport(page);
-    await this.generateArticleReport(page);
-    await this.generateSearchReport(page);
+      await this.goToMyConnectinsPage(page);
+      await this.generateConnectionsReport(page);
+      await this.goToProfilePage(page);
+      await this.generateViewsReport(page);
+      await this.generateArticleReport(page);
+      await this.generateSearchReport(page);
 
-    await this.writeInfo();
+      await this.writeInfo();
 
-    console.log(`### REPORT GENERATED AT ${new Date().toISOString()}`);
+      console.log(`### REPORT GENERATED AT ${new Date().toISOString()}`);
+    } catch (error) {
+      console.log(`### ERROR GENERATING REPORT: ${error}`);
+    }
   }
 
   async generateConnectionsReport(page) {
@@ -57,7 +61,7 @@ class GenerateReportService {
 
     await page.waitForTimeout(RandomTimeout.randomTimeout(1_000, 900)); // Just for the option to show on screen, way more time than necessary
 
-    const viewProfileButton = await page.$$(ELEMENT_ID.viewProfileButton);
+    const viewProfileButton = await page.$$(".yomama");
     await viewProfileButton[0].click();
 
     await page.waitForSelector(ELEMENT_ID.experienceLogo, { visible: true });
