@@ -11,19 +11,24 @@ class GenerateReportService {
   }
 
   async generateReport(page) {
+    await this.writeInfo(
+      "report.txt",
+      `REPORT_TIME:${new Date().toISOString()};`
+    );
+
+    await this.goToMyConnectinsPage(page);
     await this.generateConnectionsReport(page);
+    await this.goToProfilePage(page);
     await this.generateViewsReport(page);
+    await this.generateArticleReport(page);
+    await this.generateSearchReport(page);
+
+    await this.writeInfo();
+
+    console.log(`### REPORT GENERATED AT ${new Date().toISOString()}`);
   }
 
   async generateConnectionsReport(page) {
-    const myNetworkButton = await page.$$(ELEMENT_ID.myNetworkButton);
-
-    await page.waitForTimeout(RandomTimeout.randomTimeout());
-    await myNetworkButton[0].click();
-    await page.waitForSelector(ELEMENT_ID.discoverList, {
-      visible: true,
-    });
-
     const connectionsElement = await page.$eval(
       ELEMENT_ID.summaryInfoContainer,
       (element) => element.getAttribute("aria-label")
@@ -36,17 +41,29 @@ class GenerateReportService {
     );
   }
 
-  async generateViewsReport(page) {
+  async goToMyConnectinsPage(page) {
+    const myNetworkButton = await page.$$(ELEMENT_ID.myNetworkButton);
+
+    await page.waitForTimeout(RandomTimeout.randomTimeout());
+    await myNetworkButton[0].click();
+    await page.waitForSelector(ELEMENT_ID.discoverList, {
+      visible: true,
+    });
+  }
+
+  async goToProfilePage(page) {
     const profileImageButton = await page.$$(ELEMENT_ID.profileImageButton);
     await profileImageButton[0].click();
 
-    await page.waitForTimeout(RandomTimeout.randomTimeout(1_000, 500));
+    await page.waitForTimeout(RandomTimeout.randomTimeout(1_000, 900)); // Just for the option to show on screen, way more time than necessary
 
     const viewProfileButton = await page.$$(ELEMENT_ID.viewProfileButton);
     await viewProfileButton[0].click();
 
     await page.waitForSelector(ELEMENT_ID.experienceLogo, { visible: true });
+  }
 
+  async generateViewsReport(page) {
     const profileViewsContainer = await page.$x(ELEMENT_ID.profileViews);
     const profileViews = await page.evaluate(
       (el) => el.textContent,
@@ -55,17 +72,47 @@ class GenerateReportService {
 
     await this.writeInfo(
       "report.txt",
-      `PROFILE_VIEWS:${profileViews.trim().split(" ")[0]};`
+      `PROFILE_VIEWS:${this.getDataFromText(profileViews)};`
     );
   }
 
-  async writeInfo(filename = "report.txt", content) {
+  async generateArticleReport(page) {
+    const articleViewsContainer = await page.$x(ELEMENT_ID.articleViews);
+    const articleViews = await page.evaluate(
+      (el) => el.textContent,
+      articleViewsContainer[0]
+    );
+
+    await this.writeInfo(
+      "report.txt",
+      `ARTICLE_VIEWS:${this.getDataFromText(articleViews)};`
+    );
+  }
+
+  async generateSearchReport(page) {
+    const searchAppearancesContainer = await page.$x(ELEMENT_ID.articleViews);
+    const searchAppearances = await page.evaluate(
+      (el) => el.textContent,
+      searchAppearancesContainer[0]
+    );
+
+    await this.writeInfo(
+      "report.txt",
+      `SEARCH_APPEARANCES:${this.getDataFromText(searchAppearances)};`
+    );
+  }
+
+  async writeInfo(filename = "report.txt", content = "\n") {
     try {
       fs.mkdirSync("reports");
       fs.writeFile(`reports/${filename}`, "", (er) => {});
     } catch (e) {}
 
     fs.appendFile(`reports/${filename}`, content, (er) => {});
+  }
+
+  getDataFromText(text) {
+    return text.trim().split(" ")[0];
   }
 }
 

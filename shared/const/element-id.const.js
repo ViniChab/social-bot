@@ -10,6 +10,8 @@ const ELEMENT_ID = {
   viewProfileButton: "a[href='/in/vini-dos-santos/']",
   experienceLogo: "a[data-field='experience_company_logo']",
   profileViews: "//span[contains(., 'profile views')]",
+  articleViews: "//span[contains(., 'article views')]",
+  searchAppearances: "//span[contains(., 'search appearances')]",
 };
 
 module.exports = ELEMENT_ID;
