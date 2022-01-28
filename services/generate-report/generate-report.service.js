@@ -29,6 +29,7 @@ class GenerateReportService {
       console.log(`### REPORT GENERATED AT ${new Date().toISOString()}`);
     } catch (error) {
       console.log(`### ERROR GENERATING REPORT: ${error}`);
+      await this.writeInfo();
     }
   }
 
@@ -61,7 +62,7 @@ class GenerateReportService {
 
     await page.waitForTimeout(RandomTimeout.randomTimeout(1_000, 900)); // Just for the option to show on screen, way more time than necessary
 
-    const viewProfileButton = await page.$$(".yomama");
+    const viewProfileButton = await page.$$(ELEMENT_ID.viewProfileButton);
     await viewProfileButton[0].click();
 
     await page.waitForSelector(ELEMENT_ID.experienceLogo, { visible: true });
