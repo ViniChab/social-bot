@@ -1,9 +1,11 @@
 const Puppeteer = require("puppeteer");
-
-const LoginHelper = require("../../bin/helpers/login.helper");
+const LoginHelper = require("../../shared/helper/login.helper");
+const RandomTimeout = require("../../shared/helper/random-timeout.helper");
 const PuppeteerService = require("../puppeteer/pupeteer.service");
 const GenerateReportService = require("../generate-report/generate-report.service");
 const SendInvitationsService = require("../send-invitations/send-invitations.service");
+
+const ELEMENT_ID = require("../../shared/const/element-id.const");
 
 class LinkedinCoordinatorService {
   puppeteerService;
@@ -21,16 +23,16 @@ class LinkedinCoordinatorService {
     const page = await browser.newPage();
 
     await this.login(page);
-    await page.waitForTimeout(this.randomTimeout());
+    await page.waitForTimeout(RandomTimeout.randomTimeout());
     await this.generateReport(page);
-    await page.waitForTimeout(this.randomTimeout());
+    await page.waitForTimeout(RandomTimeout.randomTimeout());
 
     // await this.startInvitationService(page);
   }
 
   async login(page) {
     LoginHelper.login(page);
-    await page.waitForSelector(".scaffold-layout__sidebar", { visible: true });
+    await page.waitForSelector(ELEMENT_ID.sidebar, { visible: true });
     this.puppeteerService.screenshot(page, "after-login.png");
   }
 
@@ -42,10 +44,6 @@ class LinkedinCoordinatorService {
   async generateReport(page) {
     const generateReportService = new GenerateReportService();
     await generateReportService.generateReport(page);
-  }
-
-  randomTimeout() {
-    return Math.floor(Math.random() * (6000 - 2000 + 1)) + 2000;
   }
 }
 
