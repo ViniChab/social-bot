@@ -14,7 +14,7 @@ class GenerateReportService {
     try {
       await this.writeInfo(
         "report.txt",
-        `REPORT_TIME:${new Date().toISOString()};`
+        `REPORT_TIME:${new Date().toISOString().replace(/:/g, "#")};` // Using a replaceAll here to it's easier to parse this data later on
       );
 
       await this.goToMyConnectinsPage(page);

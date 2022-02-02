@@ -2,11 +2,14 @@ const PuppeteerService = require("./services/puppeteer/pupeteer.service");
 const BrowserHandler = require("./services/browser-handler/browser-handler.service");
 const LinkedinCoordinatorService = require("./services/linkedin-coordinator/linkedin-coordinator.service");
 
-const Express = require("express");
 const Path = require("path");
 
+const express = require("express");
 const port = process?.env?.PORT || 5100;
-const app = Express();
+const app = express();
+
+app.use("/reports", express.static(__dirname + "/reports"));
+app.use("/pages", express.static(__dirname + "/pages"));
 
 app.get("/", (req, res) => {
   res.sendFile(Path.join(__dirname, "./pages", "main.html"));

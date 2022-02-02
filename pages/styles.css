@@ -1,0 +1,7 @@
+.content-wrapper {
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+  gap: 32px;
+  padding: 64px;
+  box-sizing: border-box;
+}
