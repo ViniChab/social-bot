@@ -23,10 +23,10 @@ class LinkedinCoordinatorService {
     const page = await browser.newPage();
 
     await this.login(page);
-    await page.waitForTimeout(RandomTimeout.randomTimeout());
-    await this.generateReport(page);
     // await page.waitForTimeout(RandomTimeout.randomTimeout());
-    // await this.startInvitationService(page);
+    // await this.generateReport(page);
+    await page.waitForTimeout(RandomTimeout.randomTimeout());
+    await this.startInvitationService(page);
   }
 
   async login(page) {
@@ -37,7 +37,7 @@ class LinkedinCoordinatorService {
 
   async startInvitationService(page) {
     const sendInvitationsService = new SendInvitationsService(page);
-    sendInvitationsService.startInvitationService();
+    sendInvitationsService.startInvitationService(page);
   }
 
   async generateReport(page) {

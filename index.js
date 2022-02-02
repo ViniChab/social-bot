@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
   console.log(`### API RESTARTED ON PORT: ${port}`);
-  // main();
+  main();
 });
 
 // Main

@@ -51,9 +51,7 @@ class GenerateReportService {
 
     await page.waitForTimeout(RandomTimeout.randomTimeout());
     await myNetworkButton[0].click();
-    await page.waitForSelector(ELEMENT_ID.discoverList, {
-      visible: true,
-    });
+    await page.waitForSelector(ELEMENT_ID.discoverList, { visible: true });
   }
 
   async goToProfilePage(page) {

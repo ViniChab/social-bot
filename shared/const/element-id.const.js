@@ -12,6 +12,8 @@ const ELEMENT_ID = {
   profileViews: "//span[contains(., 'profile views')]",
   articleViews: "//span[contains(., 'article views')]",
   searchAppearances: "//span[contains(., 'search appearances')]",
+  youMayKnowButton:
+    'button[aria-label="See all Software Engineers you may know"]',
 };
 
 module.exports = ELEMENT_ID;

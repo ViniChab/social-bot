@@ -1,25 +1,21 @@
-require("dotenv").config();
+const RandomTimeout = require("../../shared/helper/random-timeout.helper");
 
-const PuppeteerService = require("../puppeteer/pupeteer.service");
+const ELEMENT_ID = require("../../shared/const/element-id.const");
 
 class SendInvitationsService {
-  puppeteerService;
-  page;
-
-  constructor(page) {
+  constructor() {
     console.log("### STARTING INVITATION SERVICE");
-    this.puppeteerService = new PuppeteerService();
-    this.page = page;
   }
 
-  async startInvitationService() {
-    const myNetworkButton = await this.page.$$('a[data-link-to="mynetwork"]');
-    await myNetworkButton[0].click();
-    await this.page.waitForSelector(".discover-fluid-entity-list", {
-      visible: true,
-    });
+  async startInvitationService(page) {
+    const myNetworkButton = await page.$$(ELEMENT_ID.myNetworkButton);
 
-    this.puppeteerService.screenshot(this.page, "my-network.png");
+    await page.waitForTimeout(RandomTimeout.randomTimeout());
+    await myNetworkButton[0].click();
+    await page.waitForSelector(ELEMENT_ID.youMayKnowButton, { visible: true });
+
+    const youMayKnowButton = await page.$$(ELEMENT_ID.youMayKnowButton);
+    await youMayKnowButton[0].click();
   }
 }
 
