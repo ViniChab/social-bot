@@ -12,8 +12,11 @@ const ELEMENT_ID = {
   profileViews: "//span[contains(., 'profile views')]",
   articleViews: "//span[contains(., 'article views')]",
   searchAppearances: "//span[contains(., 'search appearances')]",
-  youMayKnowButton:
-    'button[aria-label="See all Software Engineers you may know"]',
+  youMayKnow: 'button[aria-label="See all Software Engineers you may know"]',
+  closeChatButton: "aside .msg-overlay-bubble-header button:nth-child(3n)",
+  connectButtons:
+    ".artdeco-modal__content .ember-view.display-flex footer button",
+  connectModalCloseButton: 'button[aria-label="Dismiss"]',
 };
 
 module.exports = ELEMENT_ID;

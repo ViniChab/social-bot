@@ -23,7 +23,9 @@ class LinkedinCoordinatorService {
     const page = await browser.newPage();
 
     await this.login(page);
-    // await page.waitForTimeout(RandomTimeout.randomTimeout());
+    await page.waitForTimeout(RandomTimeout.randomTimeout());
+    this.closeChat(page);
+    // await page.waitForTimeout(RandomTimeout.randomTimeout(0, 1));
     // await this.generateReport(page);
     await page.waitForTimeout(RandomTimeout.randomTimeout());
     await this.startInvitationService(page);
@@ -33,6 +35,11 @@ class LinkedinCoordinatorService {
     LoginHelper.login(page);
     await page.waitForSelector(ELEMENT_ID.sidebar, { visible: true });
     this.puppeteerService.screenshot(page, "after-login.png");
+  }
+
+  async closeChat(page) {
+    const closeChatButton = await page.$$(ELEMENT_ID.closeChatButton);
+    await closeChatButton[0].click();
   }
 
   async startInvitationService(page) {
