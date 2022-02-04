@@ -6,7 +6,7 @@ exports.login = (page) => {
   return new Promise(async (resolve, reject) => {
     await page.goto(process.env.LINKEDIN_URL);
     await page.waitForSelector(ELEMENT_ID.usernameInput, { visible: true });
-    await page.waitForTimeout(RandomTimeout.randomTimeout(500, 800));
+    await page.waitForTimeout(RandomTimeout.randomTimeout(1_000, 1_500));
 
     const usernameInput = await page.$$(ELEMENT_ID.usernameInput);
     const passwordInput = await page.$$(ELEMENT_ID.passwordInput);

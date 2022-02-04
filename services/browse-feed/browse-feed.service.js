@@ -10,6 +10,11 @@ class BrowseFeedService {
 
   async startBrowsingFeed(page) {
     try {
+      const feedButton = await page.$$(ELEMENT_ID.feedButton);
+
+      await feedButton[0].click();
+      await page.waitForSelector(ELEMENT_ID.feedPost, { visible: true });
+
       await this.scrollDown(page);
       await this.likePosts(page);
       console.log("### FINISHED BROWSE FEED SERVICE");

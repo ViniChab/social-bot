@@ -1,6 +1,7 @@
 const Puppeteer = require("puppeteer");
 const LoginHelper = require("../../shared/helper/login.helper");
 const RandomTimeout = require("../../shared/helper/random-timeout.helper");
+const PostService = require("../post/post.service");
 const PuppeteerService = require("../puppeteer/pupeteer.service");
 const BrowseFeedService = require("../browse-feed/browse-feed.service");
 const GenerateReportService = require("../generate-report/generate-report.service");
@@ -27,7 +28,9 @@ class LinkedinCoordinatorService {
     await page.waitForTimeout(RandomTimeout.randomTimeout());
     this.closeChat(page);
     await page.waitForTimeout(RandomTimeout.randomTimeout());
-    await this.startBrowsingFeed(page);
+    await this.createPost(page);
+    // await page.waitForTimeout(RandomTimeout.randomTimeout());
+    // await this.startBrowsingFeed(page);
     // await page.waitForTimeout(RandomTimeout.randomTimeout());
     // await this.generateReport(page);
     // await page.waitForTimeout(RandomTimeout.randomTimeout());
@@ -58,6 +61,11 @@ class LinkedinCoordinatorService {
   async startBrowsingFeed(page) {
     const browseFeedService = new BrowseFeedService();
     await browseFeedService.startBrowsingFeed(page);
+  }
+
+  async createPost(page) {
+    const postService = new PostService();
+    await postService.createPost(page);
   }
 }
 

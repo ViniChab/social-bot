@@ -12,7 +12,6 @@ class SendInvitationsService {
     try {
       const myNetworkButton = await page.$$(ELEMENT_ID.myNetworkButton);
 
-      await page.waitForTimeout(RandomTimeout.randomTimeout());
       await myNetworkButton[0].click();
       await page.waitForSelector(ELEMENT_ID.youMayKnow, { visible: true });
 
