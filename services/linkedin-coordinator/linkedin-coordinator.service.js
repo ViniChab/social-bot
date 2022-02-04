@@ -2,6 +2,7 @@ const Puppeteer = require("puppeteer");
 const LoginHelper = require("../../shared/helper/login.helper");
 const RandomTimeout = require("../../shared/helper/random-timeout.helper");
 const PuppeteerService = require("../puppeteer/pupeteer.service");
+const BrowseFeedService = require("../browse-feed/browse-feed.service");
 const GenerateReportService = require("../generate-report/generate-report.service");
 const SendInvitationsService = require("../send-invitations/send-invitations.service");
 
@@ -25,10 +26,12 @@ class LinkedinCoordinatorService {
     await this.login(page);
     await page.waitForTimeout(RandomTimeout.randomTimeout());
     this.closeChat(page);
-    // await page.waitForTimeout(RandomTimeout.randomTimeout(0, 1));
-    // await this.generateReport(page);
     await page.waitForTimeout(RandomTimeout.randomTimeout());
-    await this.startInvitationService(page);
+    await this.startBrowsingFeed(page);
+    // await page.waitForTimeout(RandomTimeout.randomTimeout());
+    // await this.generateReport(page);
+    // await page.waitForTimeout(RandomTimeout.randomTimeout());
+    // await this.startInvitationService(page);
   }
 
   async login(page) {
@@ -50,6 +53,11 @@ class LinkedinCoordinatorService {
   async generateReport(page) {
     const generateReportService = new GenerateReportService();
     await generateReportService.generateReport(page);
+  }
+
+  async startBrowsingFeed(page) {
+    const browseFeedService = new BrowseFeedService();
+    await browseFeedService.startBrowsingFeed(page);
   }
 }
 

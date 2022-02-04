@@ -28,8 +28,10 @@ class SendInvitationsService {
 
       const dismissButton = await page.$$(ELEMENT_ID.connectModalCloseButton);
       await dismissButton[0].click();
+
+      console.log("### FINISHED INVITATION SERVICE");
     } catch (error) {
-      console.log(`### ERROR GENERATING REPORT: ${error}`);
+      console.log(`### ERROR SENDING INVITATION: ${error}`);
     }
   }
 

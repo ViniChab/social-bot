@@ -17,6 +17,7 @@ const ELEMENT_ID = {
   connectButtons:
     ".artdeco-modal__content .ember-view.display-flex footer button",
   connectModalCloseButton: 'button[aria-label="Dismiss"]',
+  likeButtons: 'div span button[aria-pressed="false"]',
 };
 
 module.exports = ELEMENT_ID;
