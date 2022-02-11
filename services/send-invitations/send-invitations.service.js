@@ -35,15 +35,16 @@ class SendInvitationsService {
   }
 
   async inviteRandomly(page, connectButtons) {
-    await Promise.all(
-      connectButtons.map(async (button) => {
-        await page.waitForTimeout(RandomTimeout.randomTimeout());
+    for (const button of connectButtons) {
+      await page.waitForTimeout(RandomTimeout.randomTimeout());
 
-        if (RandomBoolean.randomBoolean(75)) {
+      if (RandomBoolean.randomBoolean(75)) {
+        try {
           await button.click();
-        }
-      })
-    );
+          console.log("### INVITE SENT");
+        } catch (error) {}
+      }
+    }
   }
 }
 

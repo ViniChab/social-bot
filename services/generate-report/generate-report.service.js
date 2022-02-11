@@ -21,7 +21,7 @@ class GenerateReportService {
       await this.generateConnectionsReport(page);
       await this.goToProfilePage(page);
       await this.generateViewsReport(page);
-      await this.generateArticleReport(page);
+      // await this.generateArticleReport(page); // For some reason, the articles data isn't showing
       await this.generateSearchReport(page);
 
       await this.writeInfo();
@@ -93,7 +93,9 @@ class GenerateReportService {
   }
 
   async generateSearchReport(page) {
-    const searchAppearancesContainer = await page.$x(ELEMENT_ID.articleViews);
+    const searchAppearancesContainer = await page.$x(
+      ELEMENT_ID.searchAppearances
+    );
     const searchAppearances = await page.evaluate(
       (el) => el.textContent,
       searchAppearancesContainer[0]

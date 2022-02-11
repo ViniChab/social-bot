@@ -8,8 +8,7 @@ class BrowseFeedService {
 
   constructor() {
     console.log("### STARTING BROWSE FEED SERVICE");
-    // this.numberOfScrolls = Math.ceil(Math.random() * 50);
-    this.numberOfScrolls = 1;
+    this.numberOfScrolls = Math.ceil(Math.random() * 50);
   }
 
   async startBrowsingFeed(page) {

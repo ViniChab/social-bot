@@ -20,7 +20,6 @@ class LinkedinCoordinatorService {
 
   async startLinkedinService() {
     const browser = await Puppeteer.launch({
-      headless: false,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page = await browser.newPage();
@@ -29,13 +28,13 @@ class LinkedinCoordinatorService {
     await page.waitForTimeout(RandomTimeout.randomTimeout());
     this.closeChat(page);
 
-    const repeatForever = async () => {
-      while (true) {
-        await this.decideWhatsNext();
-      }
-    };
+    this.repeatForever(page);
+  }
 
-    repeatForever();
+  async repeatForever(page) {
+    while (true) {
+      await this.decideNextAction(page);
+    }
   }
 
   async login(page) {
@@ -69,7 +68,7 @@ class LinkedinCoordinatorService {
     await postService.createPost(page);
   }
 
-  async decideWhatsNext() {
+  async decideNextAction(page) {
     if (RandomBoolean.randomBoolean(40)) {
       if (RandomBoolean.randomBoolean(40)) {
         await page.waitForTimeout(RandomTimeout.randomTimeout());
