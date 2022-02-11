@@ -8,6 +8,7 @@ const GenerateReportService = require("../generate-report/generate-report.servic
 const SendInvitationsService = require("../send-invitations/send-invitations.service");
 
 const ELEMENT_ID = require("../../shared/const/element-id.const");
+const RandomBoolean = require("../../shared/helper/random-boolean.helper");
 
 class LinkedinCoordinatorService {
   puppeteerService;
@@ -27,14 +28,14 @@ class LinkedinCoordinatorService {
     await this.login(page);
     await page.waitForTimeout(RandomTimeout.randomTimeout());
     this.closeChat(page);
-    await page.waitForTimeout(RandomTimeout.randomTimeout());
-    await this.createPost(page);
-    // await page.waitForTimeout(RandomTimeout.randomTimeout());
-    // await this.startBrowsingFeed(page);
-    // await page.waitForTimeout(RandomTimeout.randomTimeout());
-    // await this.generateReport(page);
-    // await page.waitForTimeout(RandomTimeout.randomTimeout());
-    // await this.startInvitationService(page);
+
+    const repeatForever = async () => {
+      while (true) {
+        await this.decideWhatsNext();
+      }
+    };
+
+    repeatForever();
   }
 
   async login(page) {
@@ -66,6 +67,24 @@ class LinkedinCoordinatorService {
   async createPost(page) {
     const postService = new PostService();
     await postService.createPost(page);
+  }
+
+  async decideWhatsNext() {
+    if (RandomBoolean.randomBoolean(40)) {
+      if (RandomBoolean.randomBoolean(40)) {
+        await page.waitForTimeout(RandomTimeout.randomTimeout());
+        await this.startInvitationService(page);
+      }
+
+      await page.waitForTimeout(RandomTimeout.randomTimeout());
+      await this.createPost(page);
+    }
+
+    await page.waitForTimeout(RandomTimeout.randomTimeout());
+    await this.startBrowsingFeed(page);
+
+    await page.waitForTimeout(RandomTimeout.randomTimeout());
+    await this.generateReport(page);
   }
 }
 
