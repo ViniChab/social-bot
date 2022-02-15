@@ -20,6 +20,7 @@ class LinkedinCoordinatorService {
 
   async startLinkedinService() {
     const browser = await Puppeteer.launch({
+      headless: false,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page = await browser.newPage();
@@ -50,7 +51,7 @@ class LinkedinCoordinatorService {
 
   async startInvitationService(page) {
     const sendInvitationsService = new SendInvitationsService(page);
-    sendInvitationsService.startInvitationService(page);
+    await sendInvitationsService.startInvitationService(page);
   }
 
   async generateReport(page) {
@@ -69,14 +70,17 @@ class LinkedinCoordinatorService {
   }
 
   async decideNextAction(page) {
-    if (RandomBoolean.randomBoolean(40)) {
-      if (RandomBoolean.randomBoolean(40)) {
+    if (RandomBoolean.randomBoolean(30)) {
+      if (RandomBoolean.randomBoolean(80)) {
         await page.waitForTimeout(RandomTimeout.randomTimeout());
+
         await this.startInvitationService(page);
+        return;
       }
 
       await page.waitForTimeout(RandomTimeout.randomTimeout());
       await this.createPost(page);
+      return;
     }
 
     await page.waitForTimeout(RandomTimeout.randomTimeout());

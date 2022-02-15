@@ -40,7 +40,7 @@ class SendInvitationsService {
 
       if (RandomBoolean.randomBoolean(75)) {
         try {
-          await button.click();
+          // await button.click();
           console.log("### INVITE SENT");
         } catch (error) {}
       }
