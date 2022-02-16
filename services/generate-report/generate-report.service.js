@@ -21,7 +21,7 @@ class GenerateReportService {
       await this.generateConnectionsReport(page);
       await this.goToProfilePage(page);
       await this.generateViewsReport(page);
-      // await this.generateArticleReport(page); // For some reason, the articles data isn't showing
+      await this.generateArticleReport(page); // For some reason, the articles data isn't showing
       await this.generateSearchReport(page);
 
       await this.writeInfo();
@@ -88,7 +88,7 @@ class GenerateReportService {
 
     await this.writeInfo(
       "report.txt",
-      `ARTICLE_VIEWS:${this.getDataFromText(articleViews)};`
+      `POST_VIEWS:${this.getDataFromText(articleViews)};`
     );
   }
 

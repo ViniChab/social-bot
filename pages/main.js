@@ -33,7 +33,7 @@ window.onload = () => {
             label: "Article views",
             backgroundColor: "green",
             borderColor: "green",
-            data: reportData.ARTICLE_VIEWS,
+            data: reportData.POST_VIEWS,
           },
         ],
       },
