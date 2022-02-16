@@ -28,7 +28,8 @@ Do keep in mind that an .env file must me created as well, it should have the fo
 
 About the future
 ===================================
-Over time, linkedin will update, and this software will no longer work - that's why I created a file containing all button and input "paths", named "element-id.const.js". If something changes, updating this file should be enough.
+Over time, linkedin will update, and this software will no longer work - that's why I created a file containing all button and input "paths", named `element-id.const.js`. If something changes, updating this file should be enough.
+
 This is not foolproof though, if drastic changes are made to linkedin, drastic changes must be made to this software. But as someone who has been regularly using linkedin for years now, I'm pretty sure changes like that are pretty unusual.
 
 That's all, folks!
