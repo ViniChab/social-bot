@@ -39,7 +39,7 @@ class LinkedinCoordinatorService {
   }
 
   async login(page) {
-    LoginHelper.login(page);
+    await LoginHelper.login(page);
     await page.waitForSelector(ELEMENT_ID.sidebar, { visible: true });
     this.puppeteerService.screenshot(page, "after-login.png");
   }

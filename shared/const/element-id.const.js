@@ -1,6 +1,7 @@
 const ELEMENT_ID = {
   sidebar: ".scaffold-layout__sidebar",
   usernameInput: "input#session_key",
+  emailOrPhoneInput: "input#email-or-phone",
   passwordInput: "input#session_password",
   loginButton: "button.sign-in-form__submit-button",
   myNetworkButton: 'a[data-link-to="mynetwork"]',
