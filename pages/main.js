@@ -105,19 +105,13 @@ function getDates() {
 
   return dates.map((date) => {
     date = date.replace(/#/g, ":");
-    return new Date(date).toLocaleString("en-US");
+    date = new Date(date);
+
+    const month = date.getUTCMonth() + 1;
+    const day = date.getUTCDate();
+    const hour = date.getUTCHours();
+    const minute = date.getUTCMinutes();
+
+    return `${month}/${day} ${hour}:${minute}`;
   });
-}
-
-function newDate(pDate) {
-  let dd = pDate.split("/")[0].padStart(2, "0");
-  let mm = pDate.split("/")[1].padStart(2, "0");
-  let yyyy = pDate.split("/")[2].split(" ")[0];
-  let hh = pDate.split("/")[2].split(" ")[1].split(":")[0].padStart(2, "0");
-  let mi = pDate.split("/")[2].split(" ")[1].split(":")[1].padStart(2, "0");
-  let secs = pDate.split("/")[2].split(" ")[1].split(":")[2].padStart(2, "0");
-
-  mm = (parseInt(mm) - 1).toString(); // January is 0
-
-  return new Date(yyyy, mm, dd, hh, mi, secs);
 }

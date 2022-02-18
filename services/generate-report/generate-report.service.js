@@ -36,10 +36,10 @@ class GenerateReportService {
   async generateConnectionsReport(page) {
     const connectionsElement = await page.$eval(
       ELEMENT_ID.summaryInfoContainer,
-      (element) => element.getAttribute("aria-label")
+      (element) => element.innerText
     );
 
-    const numberOfConnections = connectionsElement.split(" ")[1];
+    const numberOfConnections = connectionsElement.split("\n")[1];
     await this.writeInfo(
       "report.txt",
       `NUMBER_OF_CONNECTIONS:${numberOfConnections};`
@@ -69,7 +69,7 @@ class GenerateReportService {
   async generateViewsReport(page) {
     const profileViewsContainer = await page.$x(ELEMENT_ID.profileViews);
     const profileViews = await page.evaluate(
-      (el) => el.textContent,
+      (el) => el.innerText,
       profileViewsContainer[0]
     );
 
@@ -82,7 +82,7 @@ class GenerateReportService {
   async generateArticleReport(page) {
     const articleViewsContainer = await page.$x(ELEMENT_ID.articleViews);
     const articleViews = await page.evaluate(
-      (el) => el.textContent,
+      (el) => el.innerText,
       articleViewsContainer[0]
     );
 
@@ -97,7 +97,7 @@ class GenerateReportService {
       ELEMENT_ID.searchAppearances
     );
     const searchAppearances = await page.evaluate(
-      (el) => el.textContent,
+      (el) => el.innerText,
       searchAppearancesContainer[0]
     );
 

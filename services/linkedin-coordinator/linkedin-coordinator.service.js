@@ -33,6 +33,7 @@ class LinkedinCoordinatorService {
 
   async repeatForever(page) {
     while (true) {
+      await page.waitForTimeout(RandomTimeout.randomTimeout(120_000, 100_000));
       await this.decideNextAction(page);
     }
   }
@@ -69,7 +70,10 @@ class LinkedinCoordinatorService {
   }
 
   async decideNextAction(page) {
-    if (RandomBoolean.randomBoolean(30)) {
+    await page.waitForTimeout(RandomTimeout.randomTimeout());
+    await this.generateReport(page);
+
+    if (RandomBoolean.randomBoolean(40)) {
       if (RandomBoolean.randomBoolean(80)) {
         await page.waitForTimeout(RandomTimeout.randomTimeout());
 
@@ -77,16 +81,20 @@ class LinkedinCoordinatorService {
         return;
       }
 
-      await page.waitForTimeout(RandomTimeout.randomTimeout());
-      await this.createPost(page);
+      if (RandomBoolean.randomBoolean(10)) {
+        await page.waitForTimeout(RandomTimeout.randomTimeout());
+        await this.createPost(page);
+      }
       return;
     }
 
     await page.waitForTimeout(RandomTimeout.randomTimeout());
     await this.startBrowsingFeed(page);
 
-    await page.waitForTimeout(RandomTimeout.randomTimeout());
-    await this.generateReport(page);
+    if (RandomBoolean.randomBoolean(10)) {
+      await page.waitForTimeout(RandomTimeout.randomTimeout());
+      await this.generateReport(page);
+    }
   }
 }
 
