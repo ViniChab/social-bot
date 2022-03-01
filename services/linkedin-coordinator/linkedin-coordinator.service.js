@@ -73,15 +73,15 @@ class LinkedinCoordinatorService {
     await page.waitForTimeout(RandomTimeout.randomTimeout());
     await this.generateReport(page);
 
-    if (RandomBoolean.randomBoolean(40)) {
-      if (RandomBoolean.randomBoolean(80)) {
+    if (RandomBoolean.randomBoolean(50)) {
+      if (RandomBoolean.randomBoolean(90)) {
         await page.waitForTimeout(RandomTimeout.randomTimeout());
 
         await this.startInvitationService(page);
         return;
       }
 
-      if (RandomBoolean.randomBoolean(10)) {
+      if (RandomBoolean.randomBoolean(50)) {
         await page.waitForTimeout(RandomTimeout.randomTimeout());
         await this.createPost(page);
       }
@@ -91,7 +91,7 @@ class LinkedinCoordinatorService {
     await page.waitForTimeout(RandomTimeout.randomTimeout());
     await this.startBrowsingFeed(page);
 
-    if (RandomBoolean.randomBoolean(10)) {
+    if (RandomBoolean.randomBoolean(3)) {
       await page.waitForTimeout(RandomTimeout.randomTimeout());
       await this.generateReport(page);
     }
