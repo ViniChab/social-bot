@@ -15,7 +15,7 @@ class BrowseFeedService {
     try {
       const feedButton = await page.$$(ELEMENT_ID.feedButton);
 
-      await feedButton[0].click();
+      await feedButton[0].evaluate((b) => b.click());
       await page.waitForSelector(ELEMENT_ID.feedPost, { visible: true });
 
       await this.scrollDown(page);
