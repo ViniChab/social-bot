@@ -1,5 +1,5 @@
 const RandomTimeout = require("../../shared/helper/random-timeout.helper");
-const Pensador = require("pensador-api");
+const pensador = require("pensador-promise").default;
 
 const ELEMENT_ID = require("../../shared/const/element-id.const");
 
@@ -12,18 +12,20 @@ class PostService {
     try {
       const feedButton = await page.$$(ELEMENT_ID.feedButton);
 
-      await feedButton[0].click();
+      await feedButton[0].evaluate((b) => b.click());
       await page.waitForSelector(ELEMENT_ID.feedPost, { visible: true });
 
       const startPostButton = await page.$$(ELEMENT_ID.startPostButton);
 
-      await startPostButton[0].click();
+      await startPostButton[0].evaluate((b) => b.click());
       await page.waitForSelector(ELEMENT_ID.postInput, { visible: true });
+      console.log("pensador", pensador);
 
-      const phrasesArray = await Pensador({
+      const phrasesArray = await pensador({
         term: this.randomCharacter(),
-        max: 20,
+        max: 21,
       });
+
 
       const position = Math.floor(Math.random() * 20);
       const post = phrasesArray.phrases[position].text;
@@ -40,7 +42,7 @@ class PostService {
       await page.waitForTimeout(RandomTimeout.randomTimeout());
 
       const finishPostButton = await page.$$(ELEMENT_ID.finishPostButton);
-      await finishPostButton[0].click();
+      await finishPostButton[0].evaluate((b) => b.click());
 
       console.log("### FINISHED POST SERVICE");
     } catch (error) {

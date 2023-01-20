@@ -50,18 +50,18 @@ class GenerateReportService {
     const myNetworkButton = await page.$$(ELEMENT_ID.myNetworkButton);
 
     await page.waitForTimeout(RandomTimeout.randomTimeout());
-    await myNetworkButton[0].click();
+    await myNetworkButton[0].evaluate((b) => b.click());
     await page.waitForSelector(ELEMENT_ID.discoverList, { visible: true });
   }
 
   async goToProfilePage(page) {
     const profileImageButton = await page.$$(ELEMENT_ID.profileImageButton);
-    await profileImageButton[0].click();
+    await profileImageButton[0].evaluate((b) => b.click());
 
     await page.waitForTimeout(RandomTimeout.randomTimeout(1_000, 900)); // Just for the option to show on screen, way more time than necessary
 
     const viewProfileButton = await page.$$(ELEMENT_ID.viewProfileButton);
-    await viewProfileButton[0].click();
+    await viewProfileButton[0].evaluate((b) => b.click());
 
     await page.waitForSelector(ELEMENT_ID.experienceLogo, { visible: true });
   }

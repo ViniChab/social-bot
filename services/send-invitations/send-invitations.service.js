@@ -12,11 +12,11 @@ class SendInvitationsService {
     try {
       const myNetworkButton = await page.$$(ELEMENT_ID.myNetworkButton);
 
-      await myNetworkButton[0].click();
+      await myNetworkButton[0].evaluate((b) => b.click());
       await page.waitForSelector(ELEMENT_ID.youMayKnow, { visible: true });
 
       const youMayKnowButton = await page.$$(ELEMENT_ID.youMayKnow);
-      await youMayKnowButton[0].click();
+      await youMayKnowButton[0].evaluate((b) => b.click());
 
       await page.waitForSelector(ELEMENT_ID.connectButtons, { visible: true });
 
@@ -26,7 +26,7 @@ class SendInvitationsService {
       await this.inviteRandomly(page, connectButtons);
 
       const dismissButton = await page.$$(ELEMENT_ID.connectModalCloseButton);
-      await dismissButton[0].click();
+      await dismissButton[0].evaluate((b) => b.click());
 
       console.log("### FINISHED INVITATION SERVICE");
     } catch (error) {
@@ -40,7 +40,7 @@ class SendInvitationsService {
 
       if (RandomBoolean.randomBoolean(75)) {
         try {
-          // await button.click();
+          await button.click();
           console.log("### INVITE SENT");
         } catch (error) {}
       }

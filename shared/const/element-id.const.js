@@ -12,7 +12,7 @@ const ELEMENT_ID = {
   viewProfileButton: "a[href='/in/pedro-augusto-dev/']",
   experienceLogo: "a[data-field='experience_company_logo']",
   profileViews: "//span[contains(., 'profile views')]",
-  articleViews: "//span[contains(., 'post views')]",
+  articleViews: "//span[contains(., 'post impressions')]",
   searchAppearances: "//span[contains(., 'search appearances')]",
   youMayKnow: 'button[aria-label="See all Software Engineers you may know"]',
   closeChatButton: "aside .msg-overlay-bubble-header button:nth-child(3n)",

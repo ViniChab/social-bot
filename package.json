@@ -15,7 +15,7 @@
     "express": "^4.17.2",
     "fs": "^0.0.1-security",
     "nodemon": "^2.0.15",
-    "pensador-api": "^1.0.0",
+    "pensador-promise": "^0.3.2",
     "puppeteer": "^13.1.1"
   }
 }

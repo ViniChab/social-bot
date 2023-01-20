@@ -20,6 +20,7 @@ class LinkedinCoordinatorService {
 
   async startLinkedinService() {
     const browser = await Puppeteer.launch({
+      // headless: false,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page = await browser.newPage();
